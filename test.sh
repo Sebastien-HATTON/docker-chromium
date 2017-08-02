@@ -3,6 +3,7 @@
 IMAGE=${1:-kurron/chromium-local:latest}
 
 AUDIO_GROUP_ID=$(cut -d: -f3 < <(getent group audio))
+VIDEO_GROUP_ID=$(cut -d: -f3 < <(getent group video))
 USER_ID=$(id -u $(whoami))
 GROUP_ID=$(id -g $(whoami))
 
@@ -19,9 +20,10 @@ CMD="docker run --env HOME=/home/powerless \
                 --volume /tmp/.X11-unix:/tmp/.X11-unix \
                 --volume /var/run/docker.sock:/var/run/docker.sock \
                 --workdir /home/powerless \
-                --cap-add=SYS_ADMIN \
                 --device /dev/snd \
                 --group-add ${AUDIO_GROUP_ID} \
+                --group-add ${VIDEO_GROUP_ID} \
+                --cap-add=SYS_ADMIN \
                 ${IMAGE}"
 
 echo $CMD
