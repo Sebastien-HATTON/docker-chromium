@@ -3,7 +3,7 @@
 IMAGE=${1:-kurron/docker-chromium:latest}
 
 AUDIO_GROUP_ID=$(cut -d: -f3 < <(getent group audio))
-VIDEO_GROUP_ID=$(cut -d: -f3 < <(getent group video)
+VIDEO_GROUP_ID=$(cut -d: -f3 < <(getent group video))
 USER_ID=$(id -u $(whoami))
 GROUP_ID=$(id -g $(whoami))
 
